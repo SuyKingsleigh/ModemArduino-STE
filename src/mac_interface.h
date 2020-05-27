@@ -1,6 +1,6 @@
 #if !defined(MAC_INTERFACE)
 #define MAC_INTERFACE
-
+#include<stdint.h> // precisa pra rodar no windows o uint8_t
 
 class MacInterface{
 
