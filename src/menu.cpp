@@ -14,7 +14,7 @@ int main()
         cout << " 2 - Definir endereço IP.\n";
         cout << " 3 - Definir endereço MAC.\n";
         cout << " 4 - Escolher um canal.\n";
-        cout << " Enter your choice and press return: ";
+        cout << " Escolha a opção: ";
 
         cin >> choice;
 
