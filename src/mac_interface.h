@@ -1,9 +1,11 @@
 #if !defined(MAC_INTERFACE)
 #define MAC_INTERFACE
+
 #include<stdint.h> // precisa pra rodar no windows o uint8_t
+#include "menu.h"
 
-class MacInterface{
 
+class Mac{
     private:
         // endereço MAC, ponteiro para um array com 6 bytes
         uint8_t * mac_addr;
@@ -16,9 +18,9 @@ class MacInterface{
 
     public:
         /** 
-         * Cria com um endereço aleatório 
+         * Cria um endereço aleatório 
         */
-        MacInterface();
+        Mac();
 
         /** 
          * Tenta setar um endereço MAC. 
@@ -28,8 +30,26 @@ class MacInterface{
 
         uint8_t * get_mac_addr();
 
-        ~MacInterface();
+        ~Mac();
     
+};
+
+class MacInterface {
+    private:
+        Mac mac; 
+
+    public:
+        MacInterface();
+        
+        // mostra as opcoes referentes ao endereco mac 
+        void show_menu();
+
+        void print_mac(); 
+
+        void update_mac(const char * addr);
+        
+        ~MacInterface();
+
 };
 
 
