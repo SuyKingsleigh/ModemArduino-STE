@@ -1,6 +1,12 @@
-void print(const char * msg){}
+#include <iostream>
+
+void print(const char * msg){
+    std::cout << msg << std::endl;
+}
 
 
-int read(const char * addr){
-    return -1;
+int read(){
+    int var; 
+    std::cin >> var; 
+    return var;
 }

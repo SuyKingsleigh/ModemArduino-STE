@@ -30,7 +30,7 @@ class Mac{
 
         uint8_t * get_mac_addr();
 
-        ~Mac();
+        virtual ~Mac();
     
 };
 
@@ -48,7 +48,7 @@ class MacInterface {
 
         void update_mac(const char * addr);
         
-        ~MacInterface();
+        virtual ~MacInterface();
 
 };
 
