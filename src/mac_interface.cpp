@@ -1,7 +1,6 @@
 #include "mac_interface.h"
 
-
-// ****************************** MAC ****************************** //
+// ******************************************** MAC ******************************************** //
 
 
 Mac::Mac(){
@@ -50,30 +49,11 @@ std::string Mac::get_mac_addr_str(){
 }
 
 
-// ****************************** MAC INTERFACE ****************************** //
+// ******************************************** MAC INTERFACE ******************************************** //
 
 
 MacInterface::MacInterface(){
     this->mac = Mac();
-}
-
-
-void MacInterface::show_menu(){ 
-    print("[1] para mostrar o MAC\n[2] para alterar o MAC");
-
-    switch (read()) {
-        case 1:
-            this->print_mac();
-            break;
-
-        case 2:
-            this->update_mac();
-            break; 
-
-        default:
-            break;
-    }
-
 }
 
 
@@ -99,3 +79,27 @@ void MacInterface::update_mac(){
         print("Algum erro aconteceu");
     }
  } 
+  
+// IMenu
+
+ void MacInterface::show_menu(){ 
+    print("[1] para mostrar o MAC\n[2] para alterar o MAC");
+
+    switch (read()) {
+        case 1:
+            this->print_mac();
+            break;
+
+        case 2:
+            this->update_mac();
+            break; 
+
+        default:
+            break;
+    }
+}
+
+
+const char * MacInterface::get_info(){
+    return "Interface MAC";
+}

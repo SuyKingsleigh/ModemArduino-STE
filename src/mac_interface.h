@@ -36,20 +36,24 @@ class Mac{
     
 };
 
-
-class MacInterface {
+class MacInterface : public IMenu {
     private:
         Mac mac; 
 
     public:
         MacInterface();
-        
-        // mostra as opcoes referentes ao endereco mac 
-        void show_menu();
+
+        ~MacInterface() = default;
 
         void print_mac(); 
 
         void update_mac();
+
+        // Metodos da classe pai 
+        
+        const char * get_info();
+        
+        void show_menu();
 
 };
 

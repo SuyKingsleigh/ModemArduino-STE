@@ -2,14 +2,28 @@
 #define MACRO
 
 
-// metodo pra escrita 
+class IMenu {
+    public: 
+        /**
+         * Nome do menu e mensagem a ser exibida 
+         * exemplo "Interface MAC"
+        */
+        virtual const char * get_info() = 0; 
+
+
+        /**
+         *  Exibe um menu com todas as opções da interface 
+        */
+        virtual void show_menu() = 0;
+
+        virtual ~IMenu() = default; 
+};
+
+
+// metodo pra escrita
 void print(const char * msg);
 
-
-/**
- * Tenta ler uma entrada do usuario 
- * Caso nao consiga retorna -1 
-*/
+// leitura de inteiros 
 int read();
 
 
