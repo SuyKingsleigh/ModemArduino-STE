@@ -5,35 +5,45 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include "menu.h"
+#include <vector>
+#include <stdlib.h>
 
 
 class Ip{
     private:
-        // endereÃ§o IP
-        string ip_addr;
+        // endereço IP
+        string ip_addr; 
+        string mask_addr;
+        string gw_addr; 
+        // Ip que vai assumir caso não seja instanciado sem nada
+        string IPDEFAULT = "192.168.1.50";
+        string MASKDEFAULT = "255.0.0.1";
+        string GWDEFAULT = "192.168.1.1";
 
-        // gera um endereÃ§o aleatÃ³rio        
-        string _generate_random_ip(); // para usar como DHCP
-
-        // verificar se Ã© IPV4 ou IPV6 vÃ¡lido
-        bool check(const char * addr); 
+        // verificar se o endereço informado é válido
+        bool check(string addr); 
+        //Para verificar se o IP digitado é somente número
+        bool isNumber(const string& str);
+        //Separa o endereço IP em tokens para validar
+        vector<string> split(const string& str, char delim);
 
     public:
-        /** 
-         * Cria um endereÃ§o aleatÃ³rio 
-        */
+
         Ip();
-
-        /** 
-         * Tenta setar um endereÃ§o IP. 
-         * Caso falhe, mantÃ©m o endereÃ§o que tem.
-        */
-        bool set_ip_addr(const char * addr); // para ip estÃ¡tico
-
+        Ip(string ip_addr);
+        Ip(string ip_addr, string mask_addr);
+        Ip(string ip_addr, string mask_addr, string gw_addr);
+ 
+        bool set_ip_addr_static(string addr); // para ip estático
+        bool set_mask_addr_static(string mask_addr); // para máscara estática
+        bool set_gw_addr_static(string gw_addr); // para gateway estático
+        bool set_ip_full_static(string ip_addr, string mask_addr, string gw_addr);
+   
 
         string get_ip_addr();
+        string get_mask_addr();
+        string get_gw_addr();
 
-        ~Ip();
     
 };
 
@@ -49,9 +59,11 @@ class IpInterface {
 
         void print_ip(); 
 
-        void update_ip(const char * addr);
+        void update_ip();
+        void update_mask();
+        void update_gw();
+        void update_all_fields();
         
-        ~IpInterface();
 
 };
 
