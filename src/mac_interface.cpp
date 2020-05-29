@@ -1,39 +1,27 @@
 #include "mac_interface.h"
-#include <cstdlib>
 
-// ***************************** MAC **********************************************//
+
+// ****************************** MAC ****************************** //
 
 
 Mac::Mac(){
-    this->mac_addr = this->_generate_random_mac();
+    uint8_t mac[6];
+    for(int i = 0; i < 6; i++) mac[i] = rand()%256; 
+    this->mac_addr = mac;
 }
 
 
-uint8_t * Mac::_generate_random_mac(){
-    static uint8_t mac[6];
-    for(int i = 0; i < 6; i++) mac[i] = rand()%256; 
-    return mac;
-}   
-
-
-bool Mac::check(const char * addr){
-    return false;
-}    
-
-
 bool Mac::set_mac_addr(const char * addr){
-        try{
-        static uint8_t new_mac[6];
+    try{
+        static uint8_t new_mac[6]; // so funciona quando essa variavel eh estatica
         char aux[2];
 
         for(int i = 2, j = 0; i < 18; i += 3, j++){
             aux[0] = addr[i-2];
             aux[1] = addr[i-1]; 
-            aux[2] = '\0';
+            aux[2] = '\0'; // sem isso da erro
 
             new_mac[j] = (uint8_t)strtol(aux, NULL, 16); 
-            // cout << hex << unsigned(inteiro[j]) << endl;
- 
         }
         this->mac_addr = new_mac; 
         return true; 
@@ -48,12 +36,21 @@ uint8_t * Mac::get_mac_addr(){
     return this->mac_addr;
 }
 
-Mac::~Mac(){
 
+std::string Mac::get_mac_addr_str(){
+    std::string s; 
+    char hex[2];
+    for(int i = 0; i < 6; i++){
+        sprintf(hex, "%X", this->mac_addr[i]);
+        std::string str_aux(hex);
+        s += str_aux; 
+        s += ":";
+    }
+    return s; 
 }
 
 
-// **************** MAC INTERFACE ********************************************* //
+// ****************************** MAC INTERFACE ****************************** //
 
 
 MacInterface::MacInterface(){
@@ -61,13 +58,44 @@ MacInterface::MacInterface(){
 }
 
 
-void MacInterface::show_menu(){ }
+void MacInterface::show_menu(){ 
+    print("[1] para mostrar o MAC\n[2] para alterar o MAC");
+
+    switch (read()) {
+        case 1:
+            this->print_mac();
+            break;
+
+        case 2:
+            this->update_mac();
+            break; 
+
+        default:
+            break;
+    }
+
+}
 
 
-void MacInterface::print_mac(){ }
+void MacInterface::print_mac(){
+    print("seu endereço MAC é: ");
+    print(this->mac.get_mac_addr_str().c_str());
+ }
 
 
-void MacInterface::update_mac(const char * addr){ } 
+void MacInterface::update_mac(){
+    try{
+        print("Digite o novo endereço MAC, deve ter o seguinte formato: 01:23:45:67:89:AB:"); 
+        std::string user_input; 
+        std::cin >> user_input; 
 
-
-MacInterface::~MacInterface(){ }
+        if(this->mac.set_mac_addr(user_input.c_str())) {
+            print("Endereço MAC trocado com sucesso, novo endereço é: ");
+            print(this->mac.get_mac_addr_str().c_str());
+        }else 
+            print("Falhou ao trocar o endereço MAC");
+        
+    }catch(...){
+        print("Algum erro aconteceu");
+    }
+ } 
