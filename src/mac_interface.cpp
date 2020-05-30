@@ -36,15 +36,18 @@ uint8_t * Mac::get_mac_addr(){
 }
 
 
-std::string Mac::get_mac_addr_str(){
-    std::string s; 
+String Mac::get_mac_addr_str(){
+    String s; 
     char hex[2];
     for(int i = 0; i < 6; i++){
         sprintf(hex, "%X", this->mac_addr[i]);
-        std::string str_aux(hex);
+        String str_aux(hex);
         s += str_aux; 
         s += ":";
     }
+
+    Serial.print("MAC: "); 
+    Serial.println(s);
     return s; 
 }
 
@@ -58,33 +61,37 @@ MacInterface::MacInterface(){
 
 
 void MacInterface::print_mac(){
-    print("seu endereço MAC é: ");
-    print(this->mac.get_mac_addr_str().c_str());
+    Serial.print("seu endereço MAC é: ");
+    Serial.println(this->mac.get_mac_addr_str().c_str());
  }
 
 
 void MacInterface::update_mac(){
     try{
-        print("Digite o novo endereço MAC, deve ter o seguinte formato: 01:23:45:67:89:AB:"); 
-        std::string user_input; 
-        std::cin >> user_input; 
+        Serial.println("Digite o novo endereço MAC, deve ter o seguinte formato: 01:23:45:67:89:AB:"); 
+        String user_input; 
+        user_input = Serial.readString();
 
         if(this->mac.set_mac_addr(user_input.c_str())) {
-            print("Endereço MAC trocado com sucesso, novo endereço é: ");
-            print(this->mac.get_mac_addr_str().c_str());
+            Serial.print("Endereço MAC trocado com sucesso, novo endereço é: ");
+            Serial.println(this->mac.get_mac_addr_str().c_str());
         }else 
-            print("Falhou ao trocar o endereço MAC");
+            Serial.println("Falhou ao trocar o endereço MAC");
         
     }catch(...){
-        print("Algum erro aconteceu");
+        Serial.println("Algum erro aconteceu");
     }
  } 
   
 // IMenu
 
  void MacInterface::show_menu(){ 
-    print("[1] para mostrar o MAC\n[2] para alterar o MAC");
-
+    Serial.println("[1] para mostrar o MAC\n[2] para alterar o MAC");
+    int c = -1; 
+    while (c < 1) {
+        c = Serial.parseInt();
+    }
+    
     switch (read()) {
         case 1:
             this->print_mac();

@@ -1,14 +1,14 @@
-#include <iostream>
+// #include <iostream>
 
 
 void print(const char * msg){
-    std::cout << msg << std::endl;
+    // std::cout << msg << std::endl;
 }
 
 
 int read(){
-    int var; 
-    std::cin >> var; 
-    return var;
+    // int var; 
+    // std::cin >> var; 
+    // return var;
+    return -1;
 }
-

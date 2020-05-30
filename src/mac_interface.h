@@ -1,12 +1,13 @@
 #if !defined(MAC_INTERFACE)
 #define MAC_INTERFACE
 
-#include<stdint.h> // precisa pra rodar no windows o uint8_t
-
-#include <iostream>
-#include <cstdlib>
-#include <cstdio>
-#include <string>
+// #include<stdint.h> // precisa pra rodar no windows o uint8_t
+#include "Arduino.h"
+#include "WString.h"
+// #include <iostream>
+// #include <cstdlib>
+// #include <cstdio>
+// #include <string>
 #include "menu.h"
 
 
@@ -32,7 +33,7 @@ class Mac{
 
         uint8_t * get_mac_addr();
 
-        std::string get_mac_addr_str(); 
+        String get_mac_addr_str(); 
     
 };
 
