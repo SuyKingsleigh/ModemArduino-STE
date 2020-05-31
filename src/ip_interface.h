@@ -7,6 +7,8 @@ using namespace std;
 #include "menu.h"
 #include <vector>
 #include <stdlib.h>
+#include "Arduino.h"
+#include "WString.h"
 
 
 class Ip{
@@ -64,7 +66,7 @@ class IpInterface {
         void update_mask();
         void update_gw();
         void update_all_fields();
-        
+        const char * get_info();    
 
 };
 
