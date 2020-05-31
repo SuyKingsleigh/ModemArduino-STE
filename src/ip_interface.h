@@ -11,11 +11,11 @@ using namespace std;
 
 class Ip{
     private:
-        // endereço IP
+        // endereço IP, máscara de gateway
         string ip_addr; 
         string mask_addr;
         string gw_addr; 
-        // Ip que vai assumir caso não seja instanciado sem nada
+        // Valores que vão ser usadoss caso seja instanciado sem argumentos
         string IPDEFAULT = "192.168.1.50";
         string MASKDEFAULT = "255.0.0.1";
         string GWDEFAULT = "192.168.1.1";
@@ -29,6 +29,7 @@ class Ip{
 
     public:
 
+        // Constutores
         Ip();
         Ip(string ip_addr);
         Ip(string ip_addr, string mask_addr);
@@ -39,7 +40,7 @@ class Ip{
         bool set_gw_addr_static(string gw_addr); // para gateway estático
         bool set_ip_full_static(string ip_addr, string mask_addr, string gw_addr);
    
-
+    
         string get_ip_addr();
         string get_mask_addr();
         string get_gw_addr();
