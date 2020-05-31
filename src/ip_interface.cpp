@@ -145,80 +145,109 @@ IpInterface::IpInterface(){
 
 
 void IpInterface::show_menu(){ 
-    print("\n[1] para mostrar o endereço IP \n[2] para alterar o IP\n[3] para alterar a Máscara\n[4] para alterar o Gateway\n[5] para alterar tudo \n");
+    Serial.println("\n[1] para mostrar o endereço IP \n[2] para alterar o IP\n[3] para alterar a Máscara\n[4] para alterar o Gateway\n[5] para alterar tudo \n");
+    Serial.println("Digite [q] para voltar");
 
-    switch (read()) {
+    int c = -1; 
+    while (c < 1) 
+        c = Serial.parseInt();
+
+    switch (c) {
         case 1:
             this->print_ip();
-            break;
+            delay(125);
+            return;
         case 2:
             this->update_ip();
-            break; 
+            delay(125);
+            return;
          case 3:
             this->update_mask();
-            break; 
+            delay(125);
+            return;
         case 4:
             this->update_gw();
-            break; 
+            delay(125);
+            return;
         case 5:
             this->update_all_fields();                
 
         default:
-            break;
+            this->get_info();
+            delay(125);
+            return;
     }
 }
 
 void IpInterface::print_ip(){ 
-    print("seu endereço IP é: \n");
-    print("IP: " +this->ip.get_ip_addr()+"\n"+"Máscara: "+this->ip.get_mask_addr()+"\n"+"Gateway: "+this->ip.get_gw_addr()+"\n");
+    Serial.println("seu endereço IP é: \n");
+    Serial.println("IP: " +this->ip.get_ip_addr()+"\n"+"Máscara: "+this->ip.get_mask_addr()+"\n"+"Gateway: "+this->ip.get_gw_addr()+"\n");
 }
 
 void IpInterface::update_ip(){ 
 
-    print("Digite o novo endereço IP, deve ter o seguinte formato: 10.10.10.10\n"); 
+    Serial.println("Digite o novo endereço IP, deve ter o seguinte formato: 10.10.10.10\n"); 
+
     string user_input; 
-    cin >> user_input; 
+    user_input = Serial.read();
+    delay(50);
 
     if(this->ip.set_ip_addr_static(user_input)){
-        print("Endereço IP trocado com sucesso, novo endereço é: \n");
-        print(this->ip.get_ip_addr());
+        Serial.println("Endereço IP trocado com sucesso, novo endereço é: \n");
+        Serial.println(this->ip.get_ip_addr());
     }
 }
 
 void IpInterface::update_mask(){ 
 
-    print("Digite a nova máscara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
+    Serial.println("Digite a nova máscara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
     string user_input; 
-    cin >> user_input; 
+    user_input = Serial.read();
+    delay(50);
 
     if(this->ip.set_mask_addr_static(user_input)){
-        print("Máscara de rede trocada com sucesso, nova máscara é: \n");
-        print(this->ip.get_mask_addr());
+        Serial.println("Máscara de rede trocada com sucesso, nova máscara é: \n");
+        Serial.println(this->ip.get_mask_addr());
     }
 }
 
 void IpInterface::update_gw(){
 
-    print("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
+    Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
     string user_input; 
-    cin >> user_input; 
+    user_input = Serial.read();
+    delay(50);
 
     if(this->ip.set_gw_addr_static(user_input)){
-        print("Gateway trocado com sucesso, novo Gateway é: \n");
-        print(this->ip.get_gw_addr());
+        Serial.println("Gateway trocado com sucesso, novo Gateway é: \n");
+        Serial.println(this->ip.get_gw_addr());
     }      
 }
 
 void IpInterface::update_all_fields(){ 
-    print("Digite o novo endereço, deve ter o seguinte formato: 10.10.10.10 255.255.255.0 10.10.10.1\n"); 
     string user_input1, user_input2, user_input3; 
-    cin >> user_input1 >> user_input2 >> user_input3; 
+
+    Serial.println("Digite o novo endereço IP, deve ter o seguinte formato: 10.10.10.10\n"); 
+    user_input1 = Serial.read();
+    delay(50);
+    Serial.println("Digite a nova máscara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
+    user_input2 = Serial.read();
+    delay(50);
+    Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
+    user_input3 = Serial.read();
+    delay(50);
+
 
     if(this->ip.set_ip_addr_static(user_input1)&&this->ip.set_ip_addr_static(user_input2)&&this->ip.set_ip_addr_static(user_input3)){
         this->ip.set_ip_addr_static(user_input1);
         this->ip.set_mask_addr_static(user_input2);
         this->ip.set_gw_addr_static(user_input3);   
-        print("Endereço alterado, novo endereço é:  \n");
-        print("IP: " +this->ip.get_ip_addr()+"\n"+"Máscara: "+this->ip.get_mask_addr()+"\n"+"Gateway: "+this->ip.get_gw_addr());
+        Serial.println("Endereço alterado, novo endereço é:  \n");
+        Serial.println("IP: " +this->ip.get_ip_addr()+"\n"+"Máscara: "+this->ip.get_mask_addr()+"\n"+"Gateway: "+this->ip.get_gw_addr());
     }      
+}
+
+
+const char * IpInterface::get_info(){
+    return "Interface IP";
 }
