@@ -31,7 +31,7 @@ class Channel {
         */
         bool deallocate();
 
-        // fmin, fmax, fcentral e status 
+        // id fmin, fmax, fcentral e status 
         String to_string(); 
 
 };

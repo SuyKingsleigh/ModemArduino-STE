@@ -9,8 +9,8 @@
 
 class Mac{
     private:
-        // endereço MAC, ponteiro para um array com 6 bytes
         uint8_t * mac_addr; 
+        String mac_addr_str;
 
     public:
         /** 

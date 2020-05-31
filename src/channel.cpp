@@ -6,7 +6,7 @@ Channel::Channel(int c_freq, int id, int bandwidth) {
     this->central_frequency = c_freq; 
     this->max_freq = c_freq + (bandwidth/2);
     this->allocated = false; 
-    this->id = id + 1;
+    this->id = id;
 }
 
 
@@ -62,7 +62,7 @@ ChannelInterface::ChannelInterface(int num_channel, int c_freq_distance, int ifr
     this->num_channel = num_channel; 
 
     for (int i = 0; i < num_channel; i++, ifreq += c_freq_distance) 
-        this->table[i] = Channel(ifreq, i, c_freq_distance);
+        this->table[i] = Channel(ifreq, i+1, c_freq_distance);
         
 }
 

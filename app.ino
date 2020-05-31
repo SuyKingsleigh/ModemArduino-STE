@@ -3,7 +3,7 @@
 #include "src/ip_interface.h"
 #include "src/mac_interface.h"
 
-IpInterface ip = IpInterface();
+
 MacInterface mac = MacInterface();
 ChannelInterface chan = ChannelInterface(11, 22, 2412); 
 
@@ -29,7 +29,7 @@ void loop(){
             return; 
         
         case 2:
-            ip.show_menu();
+            Serial.println("ainda nao implementada");
             delay(125);
             return; 
         

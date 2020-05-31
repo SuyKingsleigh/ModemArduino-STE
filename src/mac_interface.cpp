@@ -43,8 +43,6 @@ String Mac::get_mac_addr_str(){
         s += ":";
     }
 
-    Serial.print("\nEndereço MAC: "); 
-    Serial.println(s);
     return s; 
 }
 
@@ -58,7 +56,6 @@ MacInterface::MacInterface(){
 
 
 void MacInterface::print_mac(){
-    // this->mac.get_mac_addr_str();
     Serial.print("\nEndereço MAC: "); 
     Serial.println(this->mac.get_mac_addr_str());
 }
