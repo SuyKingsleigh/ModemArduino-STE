@@ -32,7 +32,7 @@ uint8_t * Mac::get_mac_addr(){
 }
 
 
-void Mac::get_mac_addr_str(){
+String Mac::get_mac_addr_str(){
     String s; 
     char hex[2];
 
@@ -45,6 +45,7 @@ void Mac::get_mac_addr_str(){
 
     Serial.print("\nEndereço MAC: "); 
     Serial.println(s);
+    return s; 
 }
 
 
@@ -57,7 +58,9 @@ MacInterface::MacInterface(){
 
 
 void MacInterface::print_mac(){
-    this->mac.get_mac_addr_str();
+    // this->mac.get_mac_addr_str();
+    Serial.print("\nEndereço MAC: "); 
+    Serial.println(this->mac.get_mac_addr_str());
 }
 
 

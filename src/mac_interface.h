@@ -26,7 +26,7 @@ class Mac{
 
         uint8_t * get_mac_addr();
 
-        void get_mac_addr_str(); 
+        String get_mac_addr_str(); 
         
 };
 

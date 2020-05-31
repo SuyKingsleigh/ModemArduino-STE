@@ -66,4 +66,5 @@ class ChannelInterface : public IMenu {
 
 };
 
+
 #endif // CHANNEL
