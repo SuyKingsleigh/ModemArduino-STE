@@ -15,13 +15,12 @@ class Mac{
     private:
         // endereço MAC, ponteiro para um array com 6 bytes
         uint8_t * mac_addr;
-
         // verifica se o endereco mac passado pelo usuario eh valido
         bool check(const char * addr);    
 
     public:
         /** 
-         * Cria um endereço aleatório 
+         * Cria com um endereço aleatório 
         */
         Mac();
 
@@ -33,8 +32,8 @@ class Mac{
 
         uint8_t * get_mac_addr();
 
-        String get_mac_addr_str(); 
-    
+        void get_mac_addr_str(); 
+        
 };
 
 class MacInterface : public IMenu {
@@ -57,6 +56,5 @@ class MacInterface : public IMenu {
         void show_menu();
 
 };
-
 
 #endif // MAC_INTERFACE
