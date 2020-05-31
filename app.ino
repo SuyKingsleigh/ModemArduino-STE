@@ -9,8 +9,24 @@ void setup(){
     delay(500);
 
     mac = MacInterface();
+
 }
 
 void loop(){
-    mac.show_menu();
+    Serial.println("[1] Para interface MAC\n[2] Para interface IP\n");
+
+    int select = -1;
+
+    while (select < 1) 
+        select = Serial.parseInt();
+    
+    switch (select) {
+        case 1:
+            mac.show_menu();
+            delay(125);
+            return; 
+
+        default:
+            return;
+    }
 }

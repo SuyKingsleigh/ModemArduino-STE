@@ -10,7 +10,6 @@ class IMenu {
         */
         virtual const char * get_info() = 0; 
 
-
         /**
          *  Exibe um menu com todas as opções da interface 
         */
@@ -18,13 +17,6 @@ class IMenu {
 
         virtual ~IMenu() = default; 
 };
-
-
-// metodo pra escrita
-void print(const char * msg);
-
-// leitura de inteiros 
-int read();
 
 
 #endif // MACRO

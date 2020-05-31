@@ -11,20 +11,19 @@ Mac::Mac(){
 }
 
 
-bool Mac::set_mac_addr(const char * addr){
-    static uint8_t new_mac[6]; // so funciona quando essa variavel eh estatica
+void Mac::set_mac_addr(const char * addr){
+    static uint8_t new_mac[6];
     char aux[2];
 
     for(int i = 2, j = 0; i < 18; i += 3, j++){
         aux[0] = addr[i-2];
         aux[1] = addr[i-1]; 
-        aux[2] = '\0'; // sem isso da erro
+        aux[2] = '\0'; 
 
         new_mac[j] = (uint8_t)strtol(aux, NULL, 16); 
     }
     
     this->mac_addr = new_mac;
-    return true; 
 }
 
 
@@ -36,6 +35,7 @@ uint8_t * Mac::get_mac_addr(){
 void Mac::get_mac_addr_str(){
     String s; 
     char hex[2];
+
     for(int i = 0; i < 6; i++){
         sprintf(hex, "%X", this->mac_addr[i]);
         String str_aux(hex);
@@ -43,10 +43,8 @@ void Mac::get_mac_addr_str(){
         s += ":";
     }
 
-    Serial.print("Endereço MAC"); 
+    Serial.print("\nEndereço MAC: "); 
     Serial.println(s);
-
-    // return s; 
 }
 
 
@@ -59,8 +57,6 @@ MacInterface::MacInterface(){
 
 
 void MacInterface::print_mac(){
-    // Serial.print("seu endereço MAC é: ");
-    // Serial.println(this->mac.get_mac_addr_str());
     this->mac.get_mac_addr_str();
 }
 
@@ -120,6 +116,8 @@ void MacInterface::update_mac(){
             return; 
 
         default:
+            this->get_info();
+            delay(125);
             return;
     }
 }
