@@ -1,6 +1,8 @@
 #include "src/menu.h"
+#include "src/channel.h"
 #include "src/ip_interface.h"
 #include "src/mac_interface.h"
+
 
 MacInterface mac; 
 

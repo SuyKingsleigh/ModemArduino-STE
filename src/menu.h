@@ -1,5 +1,5 @@
-#if !defined(MACRO)
-#define MACRO
+#if !defined(MENU)
+#define MENU
 
 
 class IMenu {
@@ -19,4 +19,4 @@ class IMenu {
 };
 
 
-#endif // MACRO
+#endif // MENU
