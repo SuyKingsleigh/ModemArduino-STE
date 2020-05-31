@@ -2,13 +2,14 @@
 #define IP_INTERFACE
 using namespace std;
 
+#include "Arduino.h"
 #include <iostream>
 #include <string>
 #include "menu.h"
 #include <vector>
 #include <stdlib.h>
-#include "Arduino.h"
-#include "WString.h"
+
+
 
 
 class Ip{
