@@ -211,10 +211,10 @@ void IpInterface::update_gw(){
 
 void IpInterface::update_all_fields(){ 
     String user_input1, user_input2, user_input3; 
-    Serial.println("Digite o novo endereco, deve ter o seguinte formato: 10.10.10.10 255.255.255.0 10.10.10.1\n");   
+    Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: 10.10.10.10\n");  
     user_input1 = Serial.read();
     delay(200);
-    Serial.println("Mascara de rede trocada com sucesso, nova mascara e: \n");
+    Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
     user_input2 = Serial.read();
     delay(200);
     Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
