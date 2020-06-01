@@ -46,7 +46,7 @@ bool Ip::check(String addr){
             }          
         }        
     }
-    if(cont_delim==3){
+    if(cont_delim==3 && addr[3]=='.' &&  addr[7]=='.' &&  addr[11]=='.'){
         return true;
     }else{
         return false;
@@ -121,19 +121,19 @@ String Ip::get_gw_addr(){
 
 String leStringSerial(){
   String conteudo = "";
-  char caractere;
-  
-  while(conteudo.length()<16) {"xxx.xxx.xxx.xxx"
+
+  // Enquanto receber algo pela serial
+  while(conteudo.length()<15) {
     // Lê byte da serial
-    char caractere;
-    caractere = Serial.read();
+    int caractere = Serial.read();
     // Ignora caractere de quebra de linha
-    if (caractere != '\n'){
-      // Concatena valores
-      conteudo += caractere;
+    char c = caractere;
+    if((c >= '0' && c <= '9') || c=='.' ){
+      conteudo += c;
     }
+    // Aguarda buffer serial ler próximo caractere
     delay(50);
-  }     
+  } 
   return conteudo;
 }
 
@@ -187,51 +187,60 @@ void IpInterface::print_ip(){
 
 void IpInterface::update_ip(){ 
 
-    Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: 10.10.10.10\n"); 
+    Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     String user_input = leStringSerial(); 
 
 
     if(this->ip.set_ip_addr_static(user_input)){
-        Serial.println("Endereço IP trocado com sucesso, novo endereco é: \n");
+        Serial.println("Endereço IP trocado com sucesso, novo endereco e: \n");
         Serial.println(this->ip.get_ip_addr());
         delay(50);
+    }else{
+        Serial.println("Endereço IP nao foi alterado, nao esta no padrao xxx.xxx.xxx.xxx  \n");
+        delay(50);    
     }
 
 }
 
 void IpInterface::update_mask(){ 
 
-    Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
+    Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     String user_input = leStringSerial(); 
     
     if(this->ip.set_mask_addr_static(user_input)){
         Serial.println("Mascara de rede trocada com sucesso, nova máscara e: \n");
         Serial.println(this->ip.get_mask_addr());
-        delay(100);
+        delay(50);
+    }else{
+        Serial.println("Mascada nao foi alterada, nao esta no padrao xxx.xxx.xxx.xxx \n");
+        delay(50);
     }
 }
 
 void IpInterface::update_gw(){
 
-    Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
+    Serial.println("Digite o novo Gateway, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     String user_input = leStringSerial(); 
 
     if(this->ip.set_gw_addr_static(user_input)){
-        Serial.println("Gateway trocado com sucesso, novo Gateway é: \n");
+        Serial.println("Gateway trocado com sucesso, novo Gateway e: \n");
         Serial.println(this->ip.get_gw_addr());
-        delay(2000);
+        delay(50);
+    }else{
+        Serial.println("Gateway nao foi alterado, nao esta no padrao xxx.xxx.xxx.xxx \n");
+        delay(50);       
     }      
 }
 
 void IpInterface::update_all_fields(){ 
     String user_input1, user_input2, user_input3; 
-    Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: 10.10.10.10\n");  
+    Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n");  
     user_input1 = leStringSerial();
     delay(200);
-    Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
+    Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     user_input2 = leStringSerial();
     delay(200);
-    Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
+    Serial.println("Digite o novo Gateway, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     user_input3 = leStringSerial();
     delay(200);
 
@@ -239,7 +248,7 @@ void IpInterface::update_all_fields(){
         this->ip.set_ip_addr_static(user_input1);
         this->ip.set_mask_addr_static(user_input2);
         this->ip.set_gw_addr_static(user_input3);   
-        Serial.println("Endereco alterado, novo endereço e:  \n");
+        Serial.println("Endereco alterado, novo endereco e:  \n");
         Serial.println ("IP: " +this->ip.get_ip_addr()+"\n"+"Mascara: "+this->ip.get_mask_addr()+"\n"+"Gateway: "+this->ip.get_gw_addr());
     }      
 }
