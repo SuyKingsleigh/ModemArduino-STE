@@ -1,74 +1,69 @@
-// #if !defined(IP_INTERFACE)
-// #define IP_INTERFACE
-// using namespace std;
+#if !defined(IP_INTERFACE)
+#define IP_INTERFACE
 
-// #include "Arduino.h"
-// #include <iostream>
-// #include <string>
-// #include "menu.h"
-// #include <vector>
-// #include <stdlib.h>
+#include "WString.h"
+#include "menu.h"
+#include <stdlib.h>
+
+using namespace std;
+class Ip{
+    private:
+        // endereço IP
+        String ip_addr; 
+        String mask_addr;
+        String gw_addr; 
+        // Ip que vai assumir caso não seja instanciado sem nada
+        String IPDEFAULT = "192.168.1.50";
+        String MASKDEFAULT = "255.0.0.1";
+        String GWDEFAULT = "192.168.1.1";
+
+        // verificar se o endereço informado é válido
+        bool check(String addr); 
+        //Para verificar se o IP digitado é somente número
+        bool isNumber(const String& str);
+        //Separa o endereço IP em tokens para validar
 
 
+    public:
 
-
-// class Ip{
-//     private:
-//         // endereço IP, máscara de gateway
-//         string ip_addr; 
-//         string mask_addr;
-//         string gw_addr; 
-//         // Valores que vão ser usadoss caso seja instanciado sem argumentos
-//         string IPDEFAULT = "192.168.1.50";
-//         string MASKDEFAULT = "255.0.0.1";
-//         string GWDEFAULT = "192.168.1.1";
-
-//         // verificar se o endereço informado é válido
-//         bool check(string addr); 
-//         //Para verificar se o IP digitado é somente número
-//         bool isNumber(const string& str);
-//         //Separa o endereço IP em tokens para validar
-//         vector<string> split(const string& str, char delim);
-
-//     public:
-
-//         // Constutores
-//         Ip();
-//         Ip(string ip_addr);
-//         Ip(string ip_addr, string mask_addr);
-//         Ip(string ip_addr, string mask_addr, string gw_addr);
+        Ip();
+        Ip(String ip_addr);
+        Ip(String ip_addr, String mask_addr);
+        Ip(String ip_addr, String mask_addr, String gw_addr);
  
-//         bool set_ip_addr_static(string addr); // para ip estático
-//         bool set_mask_addr_static(string mask_addr); // para máscara estática
-//         bool set_gw_addr_static(string gw_addr); // para gateway estático
-//         bool set_ip_full_static(string ip_addr, string mask_addr, string gw_addr);
+        bool set_ip_addr_static(String addr); // para ip estático
+        bool set_mask_addr_static(String mask_addr); // para máscara estática
+        bool set_gw_addr_static(String gw_addr); // para gateway estático
+        bool set_ip_full_static(String ip_addr, String mask_addr, String gw_addr);
    
-    
-//         string get_ip_addr();
-//         string get_mask_addr();
-//         string get_gw_addr();
+
+        String get_ip_addr();
+        String get_mask_addr();
+        String get_gw_addr();
 
     
-// };
+};
 
-// class IpInterface {
-//     private:
-//         Ip ip; 
+class IpInterface {
+    private:
+        Ip ip; 
 
-//     public:
-//         IpInterface();
+    public:
+        IpInterface();
         
-//         // mostra as opcoes referentes ao endereco mac 
-//         void show_menu();
+        // mostra as opcoes referentes ao endereco mac 
+        void show_menu();
 
-//         void print_ip(); 
+        void print_ip(); 
 
-//         void update_ip();
-//         void update_mask();
-//         void update_gw();
-//         void update_all_fields();
-//         const char * get_info();    
+        void update_ip();
+        void update_mask();
+        void update_gw();
+        void update_all_fields();
+        const char * get_info();
+        
 
-// };
+};
 
-// #endif // IP_INTERFACE
+
+#endif // IP_INTERFACE
