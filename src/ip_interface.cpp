@@ -119,6 +119,25 @@ String Ip::get_gw_addr(){
 // **************** IP INTERFACE ********************************************* //
 
 
+String leStringSerial(){
+  String conteudo = "";
+  char caractere;
+  
+  while(conteudo.length()<16) {"xxx.xxx.xxx.xxx"
+    // Lê byte da serial
+    char caractere;
+    caractere = Serial.read();
+    // Ignora caractere de quebra de linha
+    if (caractere != '\n'){
+      // Concatena valores
+      conteudo += caractere;
+    }
+    delay(50);
+  }     
+  return conteudo;
+}
+
+
 IpInterface::IpInterface(){
     this->ip = Ip();
 }
@@ -169,9 +188,8 @@ void IpInterface::print_ip(){
 void IpInterface::update_ip(){ 
 
     Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: 10.10.10.10\n"); 
-    String user_input; 
-    user_input = Serial.read();
-    delay(50);
+    String user_input = leStringSerial(); 
+
 
     if(this->ip.set_ip_addr_static(user_input)){
         Serial.println("Endereço IP trocado com sucesso, novo endereco é: \n");
@@ -184,9 +202,7 @@ void IpInterface::update_ip(){
 void IpInterface::update_mask(){ 
 
     Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
-    String user_input; 
-    user_input = Serial.read();
-    delay(50);
+    String user_input = leStringSerial(); 
     
     if(this->ip.set_mask_addr_static(user_input)){
         Serial.println("Mascara de rede trocada com sucesso, nova máscara e: \n");
@@ -198,9 +214,7 @@ void IpInterface::update_mask(){
 void IpInterface::update_gw(){
 
     Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
-    String user_input; 
-    delay(200);
-    user_input = Serial.read();
+    String user_input = leStringSerial(); 
 
     if(this->ip.set_gw_addr_static(user_input)){
         Serial.println("Gateway trocado com sucesso, novo Gateway é: \n");
@@ -212,13 +226,13 @@ void IpInterface::update_gw(){
 void IpInterface::update_all_fields(){ 
     String user_input1, user_input2, user_input3; 
     Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: 10.10.10.10\n");  
-    user_input1 = Serial.read();
+    user_input1 = leStringSerial();
     delay(200);
     Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: 255.0.0.0\n"); 
-    user_input2 = Serial.read();
+    user_input2 = leStringSerial();
     delay(200);
     Serial.println("Digite o novo Gateway, deve ter o seguinte formato: 10.10.10.1\n"); 
-    user_input3 = Serial.read();
+    user_input3 = leStringSerial();
     delay(200);
 
     if(this->ip.set_ip_addr_static(user_input1)&&this->ip.set_ip_addr_static(user_input2)&&this->ip.set_ip_addr_static(user_input3)){
