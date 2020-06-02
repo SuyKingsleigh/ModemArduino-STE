@@ -10,12 +10,12 @@ MacInterface mac = MacInterface();
 LoginInterface login = LoginInterface();
 ChannelInterface chan = ChannelInterface(11, 22, 2412); 
 
+
 void setup(){
     Serial.begin(9600);
     delay(500);
-    Serial.println("\n\n SETUP \n");
-
 }
+
 
 void loop(){
     // fica bloqueado até o usuário logar 
@@ -29,6 +29,7 @@ void loop(){
     int select = -1;
     while (select < 1) 
         select = Serial.parseInt();
+    
     
     switch (select) {
         case 1: // interface mac 
@@ -46,9 +47,9 @@ void loop(){
             delay(125);
             break;
 
-        case 4: 
+        case 4: // interface do usuario
             login.show_menu();
             delay(125);
-            break; 
+            break;
     }
 }

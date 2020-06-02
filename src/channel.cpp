@@ -34,22 +34,21 @@ bool Channel::deallocate() {
 
 
 String Channel::to_string() {
-    String ids = "ID: "; 
-    String idn = String(this->id, DEC);
+    String r = "ID: "; 
+    r += String(this->id, DEC);
 
-    String minfs = " Frequencia Minima: ";
-    String minfn = String(this->min_freq, DEC);
+    r += " Frequencia Minima: ";
+    r += String(this->min_freq, DEC);
 
-    String cenfs = " Frequencia Central: ";
-    String cenfn = String(this->central_frequency, DEC);
+    r += " Frequencia Central: ";
+    r += String(this->central_frequency, DEC);
 
-    String maxfs = " Frequencia Maxima: ";
-    String maxfn = String(this->max_freq, DEC);
+    r += " Frequencia Maxima: ";
+    r += String(this->max_freq, DEC);
     
-    String status =  " Status: ";
-    String statusstr = (this->allocated) ? "alocado" : "desalocado";
+    r +=  " Status: ";
+    r += (this->allocated) ? "alocado" : "desalocado";
 
-    String r = ids + idn + minfs + minfn + cenfs + cenfn + maxfs + maxfn + status + statusstr; 
     return r;
 }
 
@@ -84,8 +83,8 @@ String ChannelInterface::get_chan_info(int id) {
 
 int ChannelInterface::selectChannel(){ 
     Serial.println("Escolha um canal");
-    Serial.print("Valor deve ser entre 1 e "); 
-    Serial.println(this->num_channel); 
+    Serial.println("Valor deve ser entre 1 e " + this->num_channel); 
+    // Serial.println(this->num_channel); 
 
     int uin = -1; 
 

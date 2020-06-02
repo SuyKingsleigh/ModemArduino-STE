@@ -149,6 +149,7 @@ const char * LoginInterface::get_info(){
     return "Interface LOGIN";
 }
 
+
 bool LoginInterface::is_authenticated() {
     return this->status;
 }

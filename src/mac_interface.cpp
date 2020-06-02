@@ -59,7 +59,7 @@ void MacInterface::update_mac(){
            (user_input >= 97 and user_input <= 102)
         ) {
             
-            char c = user_input; // bota em caixa alta  
+            char c = user_input; 
             Serial.print(c);
             new_mac += String(c);
             
@@ -79,7 +79,6 @@ void MacInterface::update_mac(){
 }
 
 // IMenu
-
  void MacInterface::show_menu(){ 
     Serial.println("[1] para mostrar o MAC\n[2] para alterar o MAC");
 

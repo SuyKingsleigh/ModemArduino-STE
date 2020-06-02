@@ -4,7 +4,6 @@
 #include "Arduino.h"
 #include "menu.h"
 
-
 class Mac{
     private:
         String mac_addr_str; 
