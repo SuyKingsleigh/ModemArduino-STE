@@ -82,13 +82,6 @@ String ChannelInterface::get_chan_info(int id) {
 }
    
 
-// Metodos da classe parente 
-
-const char * ChannelInterface::get_info() { 
-    return "fazer";
-}
-
-
 int ChannelInterface::selectChannel(){ 
     Serial.println("Escolha um canal");
     Serial.print("Valor deve ser entre 1 e "); 
@@ -102,6 +95,13 @@ int ChannelInterface::selectChannel(){
         uin = Serial.parseInt();
 
     return --uin;
+}
+
+
+// Metodos da classe parente 
+
+const char * ChannelInterface::get_info() { 
+    return "fazer";
 }
 
 
@@ -140,7 +140,7 @@ void ChannelInterface::show_menu() {
             );
             return;
 
-        default:
+        default: // ajuda 
             this->get_info();
             delay(125);
             return;

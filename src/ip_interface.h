@@ -1,11 +1,12 @@
 #if !defined(IP_INTERFACE)
 #define IP_INTERFACE
 
-#include "WString.h"
-#include "menu.h"
-#include <stdlib.h>
 
-using namespace std;
+#include "Arduino.h"
+// #include "WString.h"
+#include "menu.h"
+// #include <stdlib.h>
+
 class Ip{
     private:
         // endereço IP
@@ -41,8 +42,8 @@ class Ip{
         String get_mask_addr();
         String get_gw_addr();
 
-    
 };
+
 
 class IpInterface {
     private:

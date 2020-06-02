@@ -130,6 +130,7 @@ String leStringSerial(){
     char c = caractere;
     if((c >= '0' && c <= '9') || c=='.' ){
       conteudo += c;
+      Serial.print(c); // assim aparece o que ta sendo digitado
     }
     // Aguarda buffer serial ler próximo caractere
     delay(50);
@@ -144,7 +145,11 @@ IpInterface::IpInterface(){
 
 
 void IpInterface::show_menu(){ 
-    Serial.println("\n[1] para mostrar o endereço IP \n[2] para alterar o IP\n[3] para alterar a Máscara\n[4] para alterar o Gateway\n[5] para alterar tudo \n");
+    Serial.println("\n[1] para mostrar o endereço IP \
+    \n[2] para alterar o IP \
+    \n[3] para alterar a Máscara \
+    \n[4] para alterar o Gateway \
+    \n[5] para alterar tudo \n");
     
     int c = -1; 
     while (c < 1) 
@@ -155,20 +160,26 @@ void IpInterface::show_menu(){
             this->print_ip();
             delay(125);
             return; 
+        
         case 2:
             this->update_ip();
             delay(125);
             return; 
+        
          case 3:
             this->update_mask();
             delay(125);
             return; 
+        
         case 4:
             this->update_gw();
             delay(125);
             return; 
+        
         case 5:
             this->update_all_fields();                
+            delay(125);
+            return;         
 
         default:
             this->get_info();
@@ -178,11 +189,10 @@ void IpInterface::show_menu(){
 }
 
 void IpInterface::print_ip(){ 
-    Serial.println("IP: " +this->ip.get_ip_addr());
-    Serial.println("Mascara: "+this->ip.get_mask_addr());
-    Serial.println("Gateway: "+this->ip.get_gw_addr()+" ");
-    Serial.println("");
-    delay(100);
+    Serial.println("IP: " +this->ip.get_ip_addr()); 
+    Serial.println("Mascara: "+this->ip.get_mask_addr()); 
+    Serial.println("Gateway: "+this->ip.get_gw_addr()+"\n"); 
+    // delay(100);
 }
 
 void IpInterface::update_ip(){ 
@@ -234,12 +244,15 @@ void IpInterface::update_gw(){
 
 void IpInterface::update_all_fields(){ 
     String user_input1, user_input2, user_input3; 
+
     Serial.println("Digite o novo endereco IP, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n");  
     user_input1 = leStringSerial();
     delay(200);
+
     Serial.println("Digite a nova mascara de rede, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     user_input2 = leStringSerial();
     delay(200);
+
     Serial.println("Digite o novo Gateway, deve ter o seguinte formato: xxx.xxx.xxx.xxx \n"); 
     user_input3 = leStringSerial();
     delay(200);

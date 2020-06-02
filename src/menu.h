@@ -1,7 +1,6 @@
 #if !defined(MACRO)
 #define MACRO
 
-
 class IMenu {
     public: 
         /**
@@ -17,6 +16,5 @@ class IMenu {
 
         virtual ~IMenu() = default; 
 };
-
 
 #endif // MACRO
