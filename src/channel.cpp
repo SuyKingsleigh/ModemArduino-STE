@@ -34,20 +34,20 @@ bool Channel::deallocate() {
 
 
 String Channel::to_string() {
-    String r = "ID: "; 
+    String r = F("ID: "); 
     r += String(this->id, DEC);
 
-    r += " Frequencia Minima: ";
+    r += F(" Frequencia Minima: ");
     r += String(this->min_freq, DEC);
 
-    r += " Frequencia Central: ";
+    r += F(" Frequencia Central: ");
     r += String(this->central_frequency, DEC);
 
-    r += " Frequencia Maxima: ";
+    r += F(" Frequencia Maxima: ");
     r += String(this->max_freq, DEC);
     
-    r +=  " Status: ";
-    r += (this->allocated) ? "alocado" : "desalocado";
+    r +=  F(" Status: ");
+    r += (this->allocated) ? F("alocado") : F("desalocado");
 
     return r;
 }
@@ -82,9 +82,9 @@ String ChannelInterface::get_chan_info(int id) {
    
 
 int ChannelInterface::selectChannel(){ 
-    Serial.println("Escolha um canal");
-    Serial.println("Valor deve ser entre 1 e " + this->num_channel); 
-    // Serial.println(this->num_channel); 
+    Serial.println(F("Escolha um canal "));
+    Serial.print(F("Valor deve ser entre 1 e ")); 
+    Serial.println(this->num_channel); 
 
     int uin = -1; 
 
@@ -97,7 +97,8 @@ int ChannelInterface::selectChannel(){
 }
 
 
-// Metodos da classe parente 
+// *** Metodos da classe parente *** 
+
 
 const char * ChannelInterface::get_info() { 
     return "fazer";
@@ -105,10 +106,10 @@ const char * ChannelInterface::get_info() {
 
 
 void ChannelInterface::show_menu() { 
-    Serial.println("[1]Informação de todos os canais \
+    Serial.println(F("[1]Informação de todos os canais \
     \n[2]Informação de Um canal especifico \
     \n[3]Aloca um canal  \
-    \n[4]Desaloca um canal");
+    \n[4]Desaloca um canal"));
 
     int select = -1;
 
@@ -126,16 +127,16 @@ void ChannelInterface::show_menu() {
             return; 
 
         case 3: // aloca um canal 
-            Serial.println("alocar um canal: "); 
+            Serial.println(F("alocar um canal: ")); 
             Serial.println (
-                (this->table[this->selectChannel()].allocate()) ? "Sucesso" : "Canal já alocado"
+                (this->table[this->selectChannel()].allocate()) ? F("Sucesso") : F("Canal já alocado")
             );
             return;
 
         case 4: // desaloca um canal 
-            Serial.println("alocar um canal: "); 
+            Serial.println(F("alocar um canal: ")); 
             Serial.println (
-                (this->table[this->selectChannel()].deallocate()) ? "Sucesso" : "Falhou"
+                (this->table[this->selectChannel()].deallocate()) ? F("Sucesso") : F("Falhou")
             );
             return;
 

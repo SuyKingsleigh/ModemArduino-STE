@@ -16,7 +16,7 @@ class Login{
         String password;
 
     public:
-        Login(String &user = D_LOGIN, String &password = D_PASSWORD);   
+        Login();
 
         String get_username();
 
@@ -33,10 +33,9 @@ class Login{
         bool is_authenticated(); 
 };
 
-
 class LoginInterface : public IMenu {
     private:
-        Login login; 
+        Login *login; 
 
         // indica se o usuario está autenticado 
         bool status; 

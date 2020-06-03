@@ -1,6 +1,6 @@
 #if !defined(IP_INTERFACE)
 #define IP_INTERFACE
-
+#define IP_STR_LEN 15 
 
 #include "Arduino.h"
 // #include "WString.h"
@@ -47,7 +47,7 @@ class Ip{
 
 class IpInterface {
     private:
-        Ip ip; 
+        Ip *ip; 
 
     public:
         IpInterface();

@@ -28,9 +28,9 @@ String StringSerial(bool password = false){
 // ******************************************** LOGIN ******************************************** //
 
 
-Login::Login(String &user = D_LOGIN, String &password = D_PASSWORD){
-    this->user = user; 
-    this->password = password;    
+Login::Login() {
+    this->user = F("admin");
+    this->password = F("admin");
 }
 
 
@@ -41,7 +41,7 @@ String Login::get_username(){
 
 // Alterar a senha de acesso ao modem
 bool Login::set_newPassword(String &newPwd){
-    Serial.println("Digite a senha antiga\n");
+    Serial.println(F("Digite a senha antiga\n"));
     String oldpwd = StringSerial(true);
 
     if(oldpwd == this->password){
@@ -68,16 +68,16 @@ void Login::resetPassword(){
 
 
 LoginInterface::LoginInterface(){
-    this->login = Login();
+    // this->login = Login();
+    this->login = new Login();
     this->status = false;
 }
 
 
  void LoginInterface::show_menu(){ 
-    Serial.println("\n[1] para logar no modem \
-                    \n[2] para alterar a senha \
-                    \n[3] para resetar a senha  \
-                    \n[4] para mostrar o usuario \n");
+    Serial.println(F("[1] para alterar a senha \
+                    \n[2] para resetar a senha  \
+                    \n[3] para mostrar o usuario \n"));
 
     int c = -1; 
     while (c < 1) 
@@ -85,21 +85,16 @@ LoginInterface::LoginInterface(){
     
     switch (c) {
         case 1:
-            this->log_in_interface();
-            delay(125);
-            return; 
-
-        case 2:
             this->update_Password();
             delay(125);
             return;  
 
-        case 3:
+        case 2:
             this->reset_Password();
             delay(125);
             return;   
         
-        case 4:
+        case 3:
             this->print_Login();
             delay(125);
             return;  
@@ -113,34 +108,35 @@ LoginInterface::LoginInterface(){
 
 
 void LoginInterface::print_Login(){
-    Serial.println(this->login.get_username()+"\n");
+    Serial.println(this->login->get_username()+"\n");
 } 
 
 
 void LoginInterface::update_Password(){
-    Serial.println("Digite a nova senha\n");
+    Serial.println(F("Digite a nova senha\n"));
     String newpwd = StringSerial(true);
-    this->login.set_newPassword(newpwd);
+    this->login->set_newPassword(newpwd);
 }
 
 
 void LoginInterface::reset_Password(){
-    this->login.resetPassword();
+    this->login->resetPassword();
+    Serial.println(F("Senha resetada para a padrão"));
 }
 
 
 void LoginInterface::log_in_interface(){
     String user; String pwd;
 
-    Serial.println("Digite o usuario\n");
+    Serial.println(F("Digite o usuario\n"));
     user = StringSerial();
 
-    Serial.println("Digite a senha\n");
+    Serial.println(F("Digite a senha\n"));
     pwd = StringSerial(true); 
 
-    this->status = this->login.log_in(user,pwd); 
+    this->status = this->login->log_in(user,pwd); 
     Serial.println(
-        (this->status) ? "Logou com sucesso" : "Senha ou usuario errado"
+        (this->status) ? F("Logou com sucesso") : F("Senha ou usuario errado")
     );
 }
 
