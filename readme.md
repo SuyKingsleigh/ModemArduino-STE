@@ -2,13 +2,13 @@
 
 Esse projeto tem a intenção de simular uma interface de um modem,  a qual o usuário pode interage com o Arduino.   Antes de conseguir fazer qualquer alteração no Modem,  o usuário é obrigado a se logar nele.   Assim que conseguir logar,  ele poderá fazer alterações na InterfaceMAC, Interface IP, Interface Channels e na Interface de usuário, como é mostrado abaixo.
 
-![Inicial](Relatorio/inicial.png)
+![Inicial](Relatorio/inicial.PNG)
 
 ## Interface do usuário. 
 
 Essa interface gerencia o acesso do usuário ao Modem. No primeiro acesso o usuário deve acessar usando usuário:"admin" e senha: "admin. Após o primeiro acesso ele tem as seguintes opções para serem alteradas: 
 
-![Usuario](Relatorio/usuario.png)
+![Usuario](Relatorio/usuario.PNG)
 
 Os metódos implementados para essas opções, são os abaixo.
 ```C
@@ -29,7 +29,7 @@ bool is_authenticated();
 A função dessa interface é possibilitar ao usuário configurar um endereço IPV4 no Modem.
 Assim que o usuário estiver logado no Modem, e optar por alterar as configurações da Interface IP, ele terá as seguintes opções:
 
-![IP](Relatorio/OP_IP.png)
+![IP](Relatorio/OP_IP.PNG)
 Para isso, o programa faz uso dos seguintes métodos: 
 
 ```C
