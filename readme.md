@@ -6,7 +6,7 @@ Esse projeto tem a intenção de simular uma interface de um modem,  a qual o us
 
 ## Interface do usuário. 
 
-Essa interface gerencia o acesso do usuário ao Modem. No primeiro acesso o usuário deve acessar usando usuário:"admin" e senha: "admin. Após o primeiro acesso ele tem as seguintes opções para serem alteradas: 
+Essa interface gerencia o acesso do usuário ao Modem. No primeiro acesso o usuário deve acessar usando usuário:"admin" e senha: "admin. Após o primeiro acesso ele tem as seguintes opções para serem alteradas quando escolher a opção '4' Para interface do usuário: 
 
 ![Usuario](Relatorio/usuario.PNG)
 
@@ -27,7 +27,7 @@ bool is_authenticated();
 ## Interface IP: 
 
 A função dessa interface é possibilitar ao usuário configurar um endereço IPV4 no Modem.
-Assim que o usuário estiver logado no Modem, e optar por alterar as configurações da Interface IP, ele terá as seguintes opções:
+Assim que o usuário estiver logado no Modem, e optar por alterar as configurações da Interface IP, ele terá as seguintes opções quando escolher a opção '2' Para interface IP:
 
 ![IP](Relatorio/OP_IP.PNG)
 Para isso, o programa faz uso dos seguintes métodos: 
